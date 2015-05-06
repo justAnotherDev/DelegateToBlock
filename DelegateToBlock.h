@@ -10,27 +10,23 @@
 @interface DelegateToBlock : NSObject
 
 /**
- @brief Transform a delegate pattern into a block. When @c selector gets send to @c target the block will be passed all of the input parameters and executed.
+ @brief Transform a delegate pattern into a block. When @c selector gets sent to @c target the block will be passed all of the input parameters and executed.
  @param selector The target's selector that is being replaced by @c targetThenParametersBlock.
  @param target The object (usually a delegate) that will receive the @c selector.
  @param targetThenParametersBlock The block to replace the selector with. The block must follow this format: ^void(id target, Type argument1, Type argument2, Type argument3)
- @warning If the provided responds already responds to the selector the block will NOT be executed.
+ @warning If the provided @c target already responds to the selector this function will return early and the block will NOT be executed.
  @return Success bool
  
  @code
+ // EXAMPLE CODE
  
-// EXAMPLE CODE
-
-// replace delegate method SEL(alertView:didDismissWithButtonIndex:) with a block
-_dismissAlertObject = [[NSObject alloc] init];
-[DelegateToBlock replaceSelector:@selector(alertView:didDismissWithButtonIndex:) ofTarget:_dismissAlertObject withBlock:^void(id target, UIAlertView *alertView, NSInteger tappedIndex) {
-    NSLog(@"tapped index: %ld", tappedIndex);
-}];
-
-
-// present the alert view with the new object as the delegate
-// we could have used self above and here, but the compiler would throw a warning about self not conforming to UIAlertViewDelegate
-[[[UIAlertView alloc] initWithTitle:@"title" message:nil delegate:_dismissAlertObject cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Proceed", nil] show]; 
+ // replace delegate method SEL(alertView:didDismissWithButtonIndex:) with a block
+ [DelegateToBlock replaceSelector:@selector(alertView:didDismissWithButtonIndex:) ofTarget:self withBlock:^void(id target, UIAlertView *alertView, NSInteger tappedIndex) {
+ NSLog(@"tapped index: %ld", tappedIndex);
+ }];
+ 
+ // present the alert view with self as the delegate
+ [[[UIAlertView alloc] initWithTitle:@"title" message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Proceed", nil] show];
  */
 +(BOOL)replaceSelector:(SEL)selector ofTarget:(id)target withBlock:(id)targetThenParametersBlock;
 
