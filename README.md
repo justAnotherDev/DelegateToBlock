@@ -8,7 +8,7 @@ Create the execution block and pass it with the delegate and selector.
 
 ## Why?
 
-While Apple has definately made a shift towards blocks much of UIKit and other frameworks still require delegate patterns. Alert views are the classic example:
+While Apple has definately made a shift towards blocks, much of UIKit and other frameworks still require delegate patterns. Alert views are the classic example:
 
 ### Current Way
 ```objc
@@ -22,7 +22,7 @@ While Apple has definately made a shift towards blocks much of UIKit and other f
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.alertView = [[UIAlertView alloc] initWithTitle:@"title" message:nil delegate:_dismissAlertObject cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Proceed", nil];
+    self.alertView = [[UIAlertView alloc] initWithTitle:@"title" message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Proceed", nil];
     [self.alertView show];
     
 }
@@ -58,4 +58,5 @@ While Apple has definately made a shift towards blocks much of UIKit and other f
 ## Pitfalls
 
 • Currently no safety checks are in place to ensure that the provided block has the same input parameters as the selector.
+
 • It is unlikely that compiler warnigs will ever work for ensuring the block and selector have matching parameters (it can be a runtime check though)
