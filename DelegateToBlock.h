@@ -21,13 +21,13 @@
  // EXAMPLE CODE
  
  // replace delegate method SEL(alertView:didDismissWithButtonIndex:) with a block
- [DelegateToBlock replaceSelector:@selector(alertView:didDismissWithButtonIndex:) ofTarget:self withBlock:^void(id target, UIAlertView *alertView, NSInteger tappedIndex) {
- NSLog(@"tapped index: %ld", tappedIndex);
+ [DelegateToBlock makeTarget:self respondToSelector:@selector(alertView:didDismissWithButtonIndex:) withBlock:^void(id target, UIAlertView *alertView, NSInteger tappedIndex) {
+     NSLog(@"tapped index: %ld", tappedIndex);
  }];
  
  // present the alert view with self as the delegate
  [[[UIAlertView alloc] initWithTitle:@"title" message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Proceed", nil] show];
  */
-+(BOOL)replaceSelector:(SEL)selector ofTarget:(id)target withBlock:(id)targetThenParametersBlock;
++(BOOL)makeTarget:(id)target respondToSelector:(SEL)selector withBlock:(id)targetThenParametersBlock;
 
 @end

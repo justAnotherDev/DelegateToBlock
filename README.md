@@ -46,7 +46,7 @@ While Apple has definately made a shift towards blocks, much of UIKit and other 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [DelegateToBlock replaceSelector:@selector(alertView:didDismissWithButtonIndex:) ofTarget:self withBlock:^void(id target, UIAlertView *alertView, NSInteger tappedIndex) {
+    [DelegateToBlock makeTarget:self respondToSelector:@selector(alertView:didDismissWithButtonIndex:) withBlock:^void(id target, UIAlertView *alertView, NSInteger tappedIndex) {
         NSLog(@"tapped index: %ld", tappedIndex);
     }];
     

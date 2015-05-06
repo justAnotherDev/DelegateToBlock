@@ -10,7 +10,7 @@
 
 @implementation DelegateToBlock
 
-+(BOOL)replaceSelector:(SEL)selector ofTarget:(id)target withBlock:(id)targetThenParametersBlock; {
++(BOOL)makeTarget:(id)target respondToSelector:(SEL)selector withBlock:(id)targetThenParametersBlock {
 	
 	// no swizzling, so log an error and bail if the method is already implemented
 	if ([target respondsToSelector:selector]) {
